@@ -20,7 +20,6 @@ a {
 }
 
 h4 {
-    margin-top: 20px;
     padding-left: 10px;
 }
 
@@ -45,6 +44,10 @@ input[type="submit"].button-danger:hover {
     padding: 0;
 }
 
+.header {
+    margin-top: 20px;
+}
+
 .our-talk, .not-our-talk {
     margin-bottom: 20px;
     padding-left: 10px;
@@ -55,6 +58,10 @@ input[type="submit"].button-danger:hover {
     background-color: #99a9b3;
     color: #FFFFFF;
     border-radius: 5px;
+}
+
+.not-our-talk {
+    border-top: solid 1px #99a9b3;
 }
 
 .date {
