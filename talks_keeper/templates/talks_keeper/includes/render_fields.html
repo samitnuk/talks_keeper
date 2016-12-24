@@ -1,0 +1,17 @@
+{% load tk_filters %}
+
+{{ form.non_field_errors }}
+
+{% for field in form.visible_fields %}
+<div class="row">
+  <div class="two columns">{{ field.label_tag }}</div>
+  <div class="seven columns">
+    {% if field|is_checkbox %}
+      {{ field }}
+    {% else %}
+      {{ field|addclass:"u-full-width" }}
+    {% endif %}
+  </div>
+  <div class="three columns error">{{ field.errors }}</div>
+</div>
+{% endfor %}
