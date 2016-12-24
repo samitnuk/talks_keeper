@@ -1,7 +1,7 @@
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 from .models import Country, Company, Talk
 
@@ -14,6 +14,7 @@ class CountryList(ListView):
 
 class CountryCreate(CreateView):
     model = Country
+    fields = ['name']
 
 
 class CountryDetail(DetailView):
@@ -44,6 +45,23 @@ class CompanyList(ListView):
 
 class CompanyCreate(CreateView):
     model = Company
+    fields = ['short_name', 'full_name']
+
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+
+        country_pk = self.kwargs['country_pk']
+        form.instance.country = Country.objects.filter(pk=country_pk).first()
+
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def get_initial(self):
+        country_pk = self.kwargs['country_pk']
+        return {'country': Country.objects.filter(pk=country_pk).first()}
 
 
 class CompanyDetail(DetailView):
@@ -69,6 +87,25 @@ class CompanyDelete(DeleteView):
 # -------------------------------------------------------------------
 class TalkCreate(CreateView):
     model = Talk
+    fields = ['date', 'source_info', 'talk_details', 'is_our_talk']
+
+    def post(self, request, *args, **kwargs):
+        company_pk = self.kwargs['company_pk']
+        self.success_url = reverse('company_detail',
+                                   kwargs={'pk': int(company_pk)})
+
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        form.instance.company = Company.objects.filter(pk=company_pk).first()
+
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def get_initial(self):
+        company_pk = self.kwargs['company_pk']
+        return {'company': Company.objects.filter(pk=company_pk).first()}
 
 
 class TalkDetail(DetailView):
