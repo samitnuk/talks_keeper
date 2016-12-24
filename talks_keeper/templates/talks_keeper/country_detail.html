@@ -1,0 +1,19 @@
+{% extends 'talks_keeper/_base.html' %}
+
+{% block meta_title %}Підприємства / {{ country }}{% endblock meta_title %}
+
+{% block header %}
+<h4>Підприємства / {{ country }}</h4>
+{% endblock header %}
+
+{% block content %}
+<ul>
+  {% for company in companies %}
+  <li>
+    <a href="{% url 'company_detail' company.id %}">
+      {{ company.short_name}} - {{ company.full_name }}
+    </a>
+  </li>
+  {% empty %}<li>Жодне підприємство ще не додане</li>{% endfor %}
+</ul>
+{% endblock content %}

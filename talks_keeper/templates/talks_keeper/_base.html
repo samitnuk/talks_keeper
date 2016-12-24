@@ -1,0 +1,28 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <title>{% block meta_title %}{% endblock meta_title %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <link rel='shortcut icon' type='image/x-icon'
+        href="{{ PORTAL_URL }}{% static 'img/favicon.ico' %}" />
+
+  <link rel="stylesheet" href="{{ PORTAL_URL }}{% static 'css/normalize.css' %}" />
+  <link rel="stylesheet" href="{{ PORTAL_URL }}{% static 'css/skeleton.css' %}" />
+  {% block extra_css %}{% endblock extra_css %}
+  <link rel="stylesheet" href="{{ PORTAL_URL }}{% static 'css/main.css' %}" />
+</head>
+<body>
+  <div class="container">
+    {% block header %}{% endblock header %}
+    {% block content %}{% endblock content %}
+  </div>
+
+  {% block extra_js %}{% endblock extra_js %}
+</body>
+</html>

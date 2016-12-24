@@ -1,0 +1,25 @@
+{% extends 'talks_keeper/_base.html' %}
+
+{% block meta_title %}{{ company }}{% endblock meta_title %}
+
+{% block header %}
+<h4>{{ company }} - {{ company.full_name }}</h4>
+{% endblock header %}
+
+{% block content %}
+  {% for talk in talks %}
+  <div class="row {% if talk.our_talk %}our-talk{% else %}not-our-talk{% endif %}">
+    <div class="nine columns ">
+      {{ talk.talk_details|linebreaks }}
+    </div>
+    <div class="three columns ">
+      <span class="date">{{ talk.date|date:'d.m.Y / (l)' }}</span>
+      {{ talk.source_info|linebreaks }}
+    </div>
+  </div>
+  {% empty %}
+  <div class="row">
+    Жодна розмова ще не додана
+  </div>
+  {% endfor %}
+{% endblock content %}
