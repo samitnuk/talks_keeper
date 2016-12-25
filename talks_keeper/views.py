@@ -128,4 +128,8 @@ class TalkUpdate(UpdateView):
 
 class TalkDelete(DeleteView):
     model = Talk
-    succes_url = reverse_lazy("talk_detail")
+
+    def get_success_url(self):
+        talk = Talk.objects.filter(pk=self.kwargs['pk']).first()
+        company_pk = talk.company.id
+        return reverse_lazy("company_detail", kwargs={'pk': company_pk})
