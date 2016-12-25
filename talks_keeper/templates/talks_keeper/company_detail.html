@@ -16,14 +16,18 @@
 {% block content %}
   {% for talk in talks %}
   <div class="row {% if talk.is_our_talk %}our-talk{% else %}not-our-talk{% endif %}">
-    <div class="nine columns ">
+    <div class="eight columns ">
       {{ talk.talk_details|linebreaks }}
     </div>
     <div class="three columns ">
       <span class="date">{{ talk.date|date:'d.m.Y / (l)' }}</span>
       {{ talk.source_info|linebreaks }}
-      <i class="fa fa-pencil" aria-hidden="true"></i>
-      <i class="fa fa-trash-o" aria-hidden="true"></i>
+    </div>
+    <div class="one column icons">
+      <a href="{% url 'talk_update' talk.id %}">
+        <i class="fa fa-pencil" aria-hidden="true"></i></a>
+      <a href="{% url 'talk_delete' talk.id %}">
+        <i class="fa fa-trash-o" aria-hidden="true"></i></a>
     </div>
   </div>
   {% empty %}

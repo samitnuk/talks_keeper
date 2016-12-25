@@ -90,7 +90,7 @@ class TalkCreate(CreateView):
     fields = ['date', 'source_info', 'talk_details', 'is_our_talk']
 
     def post(self, request, *args, **kwargs):
-        self.object = None
+        # self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
 
@@ -118,6 +118,12 @@ class TalkDetail(DetailView):
 
 class TalkUpdate(UpdateView):
     model = Talk
+    fields = ['date', 'source_info', 'talk_details', 'is_our_talk']
+
+    def get_success_url(self):
+        talk = Talk.objects.filter(pk=self.kwargs['pk']).first()
+        company_pk = talk.company.id
+        return reverse_lazy("company_detail", kwargs={'pk': company_pk})
 
 
 class TalkDelete(DeleteView):
