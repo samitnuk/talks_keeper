@@ -31,6 +31,10 @@ form {
     max-width: 1200px;
 }
 
+.navigation {
+    margin-bottom: 15px;
+}
+
 .button.button-danger,
 input[type="submit"].button-danger {
     color: #FFF;

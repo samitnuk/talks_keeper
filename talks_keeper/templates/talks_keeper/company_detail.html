@@ -4,7 +4,14 @@
 
 {% block header %}
 <div class="row header">
-  <div class="nine columns"><h5>{{ company }} - {{ company.full_name }}</h5></div>
+  <div class="nine columns">
+    <div class="navigation">
+      <a href="{% url 'country_list' %}">Країни</a> |
+      <a href="{% url 'country_detail' company.country.id %}">
+       {{ company.country }}
+      </a>
+    </div>
+    <h5>{{ company }} - {{ company.full_name }}</h5></div>
   <div class="three columns">
     <a class="button u-full-width"
       href="{% url 'talk_create' company.id %}">Додати розмову
