@@ -54,7 +54,7 @@ class Talk(models.Model):
     talk_details = models.TextField(verbose_name="Інфо про розмову")
 
     is_our_talk = models.BooleanField(default=False,
-                                      verbose_name="Ми звернулися")
+                                      verbose_name="Ми звернулися?")
 
     class Meta:
         verbose_name = "Розмова"
