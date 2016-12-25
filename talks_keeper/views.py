@@ -1,7 +1,7 @@
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 
 from .models import Country, Company, Talk
 
@@ -34,7 +34,7 @@ class CountryUpdate(UpdateView):
 
 class CountryDelete(DeleteView):
     model = Country
-    succes_url = reverse_lazy("country_list")
+    success_url = reverse_lazy("country_list")
 
 
 # -------------------------------------------------------------------
@@ -90,13 +90,12 @@ class TalkCreate(CreateView):
     fields = ['date', 'source_info', 'talk_details', 'is_our_talk']
 
     def post(self, request, *args, **kwargs):
-        company_pk = self.kwargs['company_pk']
-        self.success_url = reverse('company_detail',
-                                   kwargs={'pk': int(company_pk)})
-
+        self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
-        form.instance.company = Company.objects.filter(pk=company_pk).first()
+
+        form.instance.company = Company.objects.filter(
+            pk=self.kwargs['company_pk']).first()
 
         if form.is_valid():
             return self.form_valid(form)
@@ -104,8 +103,12 @@ class TalkCreate(CreateView):
             return self.form_invalid(form)
 
     def get_initial(self):
+        return {'object': Company.objects.filter(
+            pk=self.kwargs['company_pk']).first()}
+
+    def get_success_url(self):
         company_pk = self.kwargs['company_pk']
-        return {'company': Company.objects.filter(pk=company_pk).first()}
+        return reverse_lazy("company_detail", kwargs={'pk': company_pk})
 
 
 class TalkDetail(DetailView):
