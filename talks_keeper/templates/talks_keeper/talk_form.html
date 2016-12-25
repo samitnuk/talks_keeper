@@ -1,6 +1,12 @@
 {% extends 'talks_keeper/_base.html' %}
 
+{% load static from staticfiles %}
+
 {% block meta_title %}Додати розмову{% endblock meta_title %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ PORTAL_URL }}{% static 'css/pikaday.css' %}" />
+{% endblock extra_css %}
 
 {% block header %}
 <div class="row header">
@@ -15,3 +21,17 @@
   {% include "talks_keeper/includes/button.html" with button_value="Готово" %}
 </form>
 {% endblock content %}
+
+{% block extra_js %}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+  <script src="{{ PORTAL_URL }}{% static 'js/pikaday.js' %}"></script>
+  <script>
+    var rangeStart = new Pikaday({
+      field: document.getElementById('id_date'),
+      firstDay: 1,
+      fomat: 'YYYY-MM-DD',
+      minDate: new Date(2016, 0, 1),
+      maxDate: new Date(2018, 12, 31),
+    });
+  </script>
+{% endblock extra_js %}
