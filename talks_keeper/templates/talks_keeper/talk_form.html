@@ -5,7 +5,7 @@
 {% block meta_title %}Додати розмову{% endblock meta_title %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="{{ PORTAL_URL }}{% static 'css/pikaday.css' %}" />
+  <link rel="stylesheet" href="{{ PORTAL_URL }}{% static 'css/datepicker.min.css' %}" />
 {% endblock extra_css %}
 
 {% block header %}
@@ -23,15 +23,26 @@
 {% endblock content %}
 
 {% block extra_js %}
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
-  <script src="{{ PORTAL_URL }}{% static 'js/pikaday.js' %}"></script>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+          integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+          crossorigin="anonymous"></script>
+  <script src="{{ PORTAL_URL }}{% static 'js/datepicker.min.js' %}"></script>
   <script>
-    var rangeStart = new Pikaday({
-      field: document.getElementById('id_date'),
-      firstDay: 1,
-      fomat: 'YYYY-MM-DD',
-      minDate: new Date(2016, 0, 1),
-      maxDate: new Date(2018, 12, 31),
+    $('#id_date').datepicker({
+      language: {
+        days: ['Неділя','Понеділок','Вівторок','Середа','Четвер','Пятниця','Субота'],
+        daysShort: ['Нед','Пон','Вів','Сер','Чет','Пят','Суб'],
+        daysMin: ['Нд','Пн','Вт','Ср','Чт','Пт','Сб'],
+        months: ['Січень','Лютий','Березень','Квітень','Травень','Червень','Липень','Серпень','Вересень','Жовтень','Листопад','Грудень'],
+        monthsShort: ['Січ','Лют','Бер','Кві','Тра','Чер','Лип','Сер','Вер','Жов','Лис','Гру'],
+        today: 'Сьогодні',
+        clear: 'Очистити',
+        dateFormat: 'yyyy-mm-dd',
+        timeFormat: 'hh:ii',
+        firstDay: 1,
+      },
+      maxDate: new Date(),
+      timepicker: true,
     });
   </script>
 {% endblock extra_js %}
