@@ -1,5 +1,6 @@
 from django import template
 from django.forms import CheckboxInput
+from django.contrib.auth.models import Group
 
 
 register = template.Library()
@@ -14,3 +15,9 @@ def addclass(value, arg):
 def is_checkbox(field):
     return field.field.widget.__class__.__name__ == \
         CheckboxInput().__class__.__name__
+
+
+@register.filter(name='in_group')
+def in_group(user, group_name):
+    group = Group.objects.get(name=group_name)
+    return True if group in user.groups.all() else False
