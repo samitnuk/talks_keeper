@@ -2,6 +2,8 @@
 
 {% load static from staticfiles %}
 
+{% load tk_filters %}
+
 {% block meta_title %}Додати розмову{% endblock meta_title %}
 
 {% block extra_css %}
@@ -17,7 +19,23 @@
 {% block content %}
 <form action="" method="post">
   {% csrf_token %}
-  {% include "talks_keeper/includes/render_fields.html" %}
+  
+  {{ form.non_field_errors }}
+
+  {% for field in form.visible_fields %}
+  <div class="row">
+    <div class="two columns">{{ field.label_tag }}</div>
+    <div class="seven columns">
+      {% if field|is_checkbox %}
+        {{ field }}
+      {% else %}
+        {{ field|addclass:"u-full-width text" }}
+      {% endif %}
+    </div>
+    <div class="three columns error">{{ field.errors }}</div>
+  </div>
+  {% endfor %}
+
   {% include "talks_keeper/includes/button.html" with button_value="Готово" %}
 </form>
 {% endblock content %}

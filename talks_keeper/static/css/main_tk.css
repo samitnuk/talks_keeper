@@ -93,3 +93,8 @@ input[type="submit"].button-danger:hover {
 .not-our-talk:hover .icons {
     display: block;
 }
+
+textarea.text {
+    height: initial;
+    min-height: 38px;
+}
