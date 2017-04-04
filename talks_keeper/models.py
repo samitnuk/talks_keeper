@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 
+from colorfield.fields import ColorField
+
 
 class Country(models.Model):
 
@@ -66,3 +68,11 @@ class Talk(models.Model):
 
     def get_absolute_url(self):
         return reverse("talk_detail", kwargs={"pk": self.pk})
+
+
+class Label(models.Model):
+
+    name = models.CharField(
+        max_length=100, db_index=True, verbose_name="Назва мітки")
+
+    color = ColorField(verbose_name="Колір")
