@@ -5,7 +5,7 @@ from django.urls import reverse
 class Country(models.Model):
 
     name = models.CharField(
-        max_length=256, verbose_name="Назва країни")
+        max_length=256, db_index=True, verbose_name="Назва країни")
 
     class Meta:
         verbose_name = "Країна"
@@ -21,7 +21,7 @@ class Country(models.Model):
 class Company(models.Model):
 
     short_name = models.CharField(
-        max_length=256, verbose_name="Коротка назва")
+        max_length=256, db_index=True, verbose_name="Коротка назва")
 
     full_name = models.CharField(
         max_length=256, verbose_name="Повна назва", blank=True)

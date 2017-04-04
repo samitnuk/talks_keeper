@@ -1,7 +1,6 @@
 from django import template
-from django.forms import CheckboxInput
 from django.contrib.auth.models import Group
-
+from django.forms import CheckboxInput
 
 register = template.Library()
 

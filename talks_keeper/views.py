@@ -1,9 +1,9 @@
-from django.views.generic import CreateView, UpdateView, DeleteView
-from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, UpdateView
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 
-from .models import Country, Company, Talk
+from .models import Company, Country, Talk
 
 
 # -------------------------------------------------------------------
