@@ -69,10 +69,24 @@ class Talk(models.Model):
     def get_absolute_url(self):
         return reverse("talk_detail", kwargs={"pk": self.pk})
 
+    def get_labels(self):
+        return self.label_set.all()
+
 
 class Label(models.Model):
 
     name = models.CharField(
-        max_length=100, db_index=True, verbose_name="Назва мітки")
+        max_length=100, db_index=True,
+        unique=True, verbose_name="Назва мітки")
 
     color = ColorField(verbose_name="Колір")
+
+    talks = models.ManyToManyField(Talk)
+
+    class Meta:
+        verbose_name = "Мітка"
+        verbose_name_plural = "Мітки"
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name

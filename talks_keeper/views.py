@@ -133,3 +133,24 @@ class TalkDelete(DeleteView):
         talk = Talk.objects.filter(pk=self.kwargs['pk']).first()
         company_pk = talk.company.id
         return reverse_lazy("company_detail", kwargs={'pk': company_pk})
+
+
+# -------------------------------------------------------------------
+class LabelList(ListView):
+    model = Company
+    context_object_name = "labels"
+
+
+class LabelCreate(CreateView):
+    model = Company
+    fields = ['name', 'color']
+
+
+class LabelUpdate(UpdateView):
+    model = Company
+    fields = ['name', 'color']
+
+
+class LabelDelete(DeleteView):
+    model = Company
+    succes_url = reverse_lazy("label_list")
