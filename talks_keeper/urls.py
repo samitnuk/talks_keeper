@@ -50,4 +50,20 @@ urlpatterns = [
         login_required(views.TalkDelete.as_view()),
         name="talk_delete"),
 
+    url(r'^label/list/',
+        login_required(views.LabelList.as_view()),
+        name="label_list"),
+    url(r'^label/create/',
+        login_required(views.LabelCreate.as_view()),
+        name="label_create"),
+    url(r'^label/detail/(?P<pk>\d+)/',
+        login_required(views.LabelDetail.as_view()),
+        name="label_detail"),
+    url(r'^label/update/(?P<pk>\d+)/',
+        login_required(views.LabelUpdate.as_view()),
+        name="label_update"),
+    url(r'^label/delete/(?P<pk>\d+)/',
+        login_required(views.LabelDelete.as_view()),
+        name="label_delete"),
+
 ]

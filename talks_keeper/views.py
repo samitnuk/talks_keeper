@@ -3,7 +3,7 @@ from django.views.generic import CreateView, DeleteView, UpdateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
-from .models import Company, Country, Talk
+from .models import Company, Country, Label, Talk
 
 
 # -------------------------------------------------------------------
@@ -35,6 +35,7 @@ class CountryUpdate(UpdateView):
 class CountryDelete(DeleteView):
     model = Country
     success_url = reverse_lazy("country_list")
+    template_name = 'talks_keeper/object_confirm_delete.html'
 
 
 # -------------------------------------------------------------------
@@ -82,6 +83,7 @@ class CompanyUpdate(UpdateView):
 class CompanyDelete(DeleteView):
     model = Company
     succes_url = reverse_lazy("company_list")
+    template_name = 'talks_keeper/object_confirm_delete.html'
 
 
 # -------------------------------------------------------------------
@@ -128,6 +130,7 @@ class TalkUpdate(UpdateView):
 
 class TalkDelete(DeleteView):
     model = Talk
+    template_name = 'talks_keeper/object_confirm_delete.html'
 
     def get_success_url(self):
         talk = Talk.objects.filter(pk=self.kwargs['pk']).first()
@@ -137,20 +140,26 @@ class TalkDelete(DeleteView):
 
 # -------------------------------------------------------------------
 class LabelList(ListView):
-    model = Company
+    model = Label
     context_object_name = "labels"
 
 
 class LabelCreate(CreateView):
-    model = Company
+    model = Label
     fields = ['name', 'color']
 
 
+class LabelDetail(DetailView):
+    model = Label
+    context_object_name = "label"
+
+
 class LabelUpdate(UpdateView):
-    model = Company
+    model = Label
     fields = ['name', 'color']
 
 
 class LabelDelete(DeleteView):
-    model = Company
-    succes_url = reverse_lazy("label_list")
+    model = Label
+    success_url = reverse_lazy("label_list")
+    template_name = 'talks_keeper/object_confirm_delete.html'
