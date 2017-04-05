@@ -81,7 +81,7 @@ class Label(models.Model):
 
     color = ColorField(verbose_name="Колір")
 
-    talks = models.ManyToManyField(Talk)
+    talks = models.ManyToManyField(Talk, blank=True)
 
     class Meta:
         verbose_name = "Мітка"
@@ -90,3 +90,6 @@ class Label(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("label_detail", kwargs={"pk": self.pk})
