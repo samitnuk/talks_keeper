@@ -1,0 +1,42 @@
+{% extends 'talks_keeper/_base.html' %}
+
+{% block meta_title %}Мітки{% endblock meta_title %}
+
+{% block header %}
+<div class="row header">
+  <div class="nine columns">
+    <div class="navigation">
+      <a href="{% url 'country_list' %}">Країни</a>
+    </div>
+  </div>
+  <div class="three columns">
+    <a class="button u-full-width"
+      href="{% url 'label_create' %}">Додати мітку
+    </a>
+  </div>
+</div>
+{% endblock header %}
+
+{% block content %}
+  {% for label in labels %}
+  <div class="row not-our-talk">
+    <div class="eleven columns label" style="background-color: {{ label.color }}">
+      {{ label.name}}
+    </div>
+    <div class="one column icons">
+      <a href="{% url 'label_update' label.id %}">
+        <i class="fa fa-pencil" aria-hidden="true"></i></a>
+      <a href="{% url 'label_delete' label.id %}">
+        <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+    </div>
+  </div>
+  {% empty %}
+  <div class="row">
+    Жодна мітка ще не додана
+  </div>
+  {% endfor %}
+{% endblock content %}
+
+{% block extra_js %}
+  <script src="https://use.fontawesome.com/62626c0a50.js"></script>
+{% endblock extra_js %}

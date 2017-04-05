@@ -98,3 +98,8 @@ textarea.text {
     height: initial;
     min-height: 38px;
 }
+
+.label {
+    padding: 0 5px 0 5px;
+    border-radius: 5px;
+}

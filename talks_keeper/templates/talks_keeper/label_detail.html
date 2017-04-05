@@ -1,0 +1,29 @@
+{% extends 'talks_keeper/_base.html' %}
+
+{% block meta_title %}Мітка{% endblock meta_title %}
+
+{% block header %}
+<div class="row header">
+  <div class="four columns">
+    <div class="navigation">
+      <a href="{% url 'country_list' %}">Країни</a>
+    </div>
+  </div>
+  <div class="five columns">
+    <div class="navigation">
+      <a href="{% url 'label_list' %}">Мітки</a>
+    </div>
+  </div>
+  <div class="three columns">
+    <a class="button u-full-width"
+      href="{% url 'label_create' %}">Додати мітку
+    </a>
+  </div>
+</div>
+{% endblock header %}
+
+{% block content %}
+<div class="label" style="background-color: {{ label.color }}">
+  {{ label.name }}
+</div>
+{% endblock content %}

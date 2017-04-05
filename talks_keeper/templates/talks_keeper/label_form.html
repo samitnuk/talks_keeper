@@ -1,0 +1,23 @@
+{% extends 'talks_keeper/_base.html' %}
+
+{% load static from staticfiles %}
+
+{% block meta_title %}Додати Мітку{% endblock meta_title %}
+
+{% block header %}
+<div class="row header">
+	<h4>Додати Мітку</h4>
+</div>
+{% endblock header %}
+
+{% block content %}
+<form action="" method="post">
+  {% csrf_token %}
+  {% include "talks_keeper/includes/render_fields.html" %}
+  {% include "talks_keeper/includes/button.html" with button_value="Готово" %}
+</form>
+{% endblock content %}
+
+{% block extra_js %}
+  <script src="{{ PORTAL_URL }}{% static 'js/jscolor.min.js' %}"></script>
+{% endblock extra_js %}

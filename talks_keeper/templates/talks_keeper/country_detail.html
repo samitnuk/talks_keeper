@@ -4,16 +4,22 @@
 
 {% block header %}
 <div class="row header">
-  <div class="nine columns">
+  <div class="four columns">
     <div class="navigation">
       <a href="{% url 'country_list' %}">Країни</a>
     </div>
-    <h4>Підприємства / {{ country }}</h4></div>
+  </div>
+  <div class="five columns">
+    <div class="navigation">
+      <a href="{% url 'label_list' %}">Мітки</a>
+    </div>
+  </div>
   <div class="three columns">
     <a class="button u-full-width"
       href="{% url 'company_create' country.id %}">Додати підприємство
     </a>
   </div>
+  <h4>Підприємства / {{ country }}</h4>
 </div>
 {% endblock header %}
 
