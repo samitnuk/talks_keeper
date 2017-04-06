@@ -4,6 +4,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
 from .models import Company, Country, Label, Talk
+from .forms import TalkForm
 
 
 # -------------------------------------------------------------------
@@ -89,10 +90,9 @@ class CompanyDelete(DeleteView):
 # -------------------------------------------------------------------
 class TalkCreate(CreateView):
     model = Talk
-    fields = ['date', 'source_info', 'talk_details', 'is_our_talk']
+    form_class = TalkForm
 
     def post(self, request, *args, **kwargs):
-        # self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
 
@@ -108,6 +108,10 @@ class TalkCreate(CreateView):
         return {'object': Company.objects.filter(
             pk=self.kwargs['company_pk']).first()}
 
+    def form_valid(self, form):
+        form.save()
+        return super(TalkCreate, self).form_valid(form)
+
     def get_success_url(self):
         company_pk = self.kwargs['company_pk']
         return reverse_lazy("company_detail", kwargs={'pk': company_pk})
@@ -120,7 +124,7 @@ class TalkDetail(DetailView):
 
 class TalkUpdate(UpdateView):
     model = Talk
-    fields = ['date', 'source_info', 'talk_details', 'is_our_talk']
+    form_class = TalkForm
 
     def get_success_url(self):
         talk = Talk.objects.filter(pk=self.kwargs['pk']).first()
