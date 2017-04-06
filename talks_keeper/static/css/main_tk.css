@@ -59,8 +59,7 @@ input[type="submit"].button-danger:hover {
 
 .our-talk, .not-our-talk {
     margin-bottom: 20px;
-    padding-left: 10px;
-    padding-top: 10px;
+    padding: 10px 0 3px 10px;
 }
 
 .our-talk {
@@ -100,6 +99,8 @@ textarea.text {
 }
 
 .label {
+    display: inline-block;
     padding: 0 5px 0 5px;
     border-radius: 5px;
+    color: #222222;
 }

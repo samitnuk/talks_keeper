@@ -35,6 +35,11 @@
     <div class="three columns ">
       <span class="date">{{ talk.date|date:'d.m.Y / (l) / H:i' }}</span>
       {{ talk.source_info|linebreaks }}
+      {% for label in talk.get_labels %}
+        <div class="label" style="background-color: {{ label.color }}">
+          {{ label }}
+        </div> 
+      {% endfor %}
     </div>
     <div class="one column icons">
       <a href="{% url 'talk_update' talk.id %}">
