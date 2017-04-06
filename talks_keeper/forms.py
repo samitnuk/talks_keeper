@@ -7,7 +7,7 @@ class TalkForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(TalkForm, self).__init__(*args, **kwargs)
-        instance = kwargs['instance']
+        instance = kwargs.get('instance')
         labels = Label.objects.all()
         for label_ in labels:
             if instance is None:
