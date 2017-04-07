@@ -22,8 +22,16 @@
       href="{% url 'talk_create' company.id %}">Додати розмову
     </a>
   </div>
-  <h5>{{ company }} - {{ company.full_name }}</h5>
 </div>
+<div class="row">
+  <div class="ten columns">
+    <h5>{{ company }} - {{ company.full_name }}</h5>
+  </div>
+  <div class="two columns">
+    <a href="{% url 'company_detail' company.id %}">Всі записи</a>
+  </div>
+</div>
+
 {% endblock header %}
 
 {% block content %}
@@ -37,7 +45,9 @@
       {{ talk.source_info|linebreaks }}
       {% for label in talk.get_labels %}
         <div class="label" style="background-color: {{ label.color }}">
-          {{ label }}
+          <a href="{% url 'company_detail_by_label' company.id label.id %}">
+            {{ label }}
+          </a>
         </div> 
       {% endfor %}
     </div>

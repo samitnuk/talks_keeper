@@ -73,7 +73,11 @@ class CompanyDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super(CompanyDetail, self).get_context_data(**kwargs)
         company = Company.objects.filter(pk=self.kwargs['pk'])
-        context["talks"] = Talk.objects.filter(company=company)
+        talks = Talk.objects.filter(company=company)
+        label_pk = self.kwargs.get('label_pk')
+        if label_pk is not None:
+            talks = talks.filter(label__pk=int(label_pk))
+        context["talks"] = talks
         return context
 
 
